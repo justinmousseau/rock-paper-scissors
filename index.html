@@ -69,6 +69,9 @@
 				
 				while (outcome == 'draw') {
 					outcome = playRound(playerPlay(), computerPlay());
+					if (outcome == 'draw') {
+						console.log('Draw!')
+					}
 				}
 				
 				if (outcome == 'win') {
@@ -88,10 +91,8 @@
 
 			if (playerScore > computerScore) {
 				console.log('You win! :)');
-			} else if (playerScore < computerScore) {
-				console.log('You lose! :(');
 			} else {
-				console.log('It\'s a draw.');
+				console.log('You lose! :(');
 			}
 		}
 

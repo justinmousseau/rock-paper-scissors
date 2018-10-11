@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		let choices = ['rock', 'paper', 'scissors'];
+
+		function computerPlay() {
+			let randomPick = Math.floor(Math.random() * 3);
+			return choices[randomPick];
+		}
+
+		function playerPlay() {
+			let choice = '';
+
+			while (choices.indexOf(choice) < 0) {
+				choice = prompt("Rock, paper, scissors: ");
+				choice = choice.toLowerCase();
+				if (choices.indexOf(choice) < 0) {
+					alert('That was not a valid choice');
+				}
+			}
+
+			return choice;
+		}
+
+		function playRound(playerSelection, computerSelection) {
+			let win = false;
+			let draw = (playerSelection == computerSelection);
+
+			switch(playerSelection) {
+				case 'rock':
+					if (computerSelection == 'scissors') {
+						win = true;
+					}
+					break;
+				case 'paper':
+					if (computerSelection == 'rock') {
+						win = true;
+					}
+					break;
+				case 'scissors':
+					if (computerSelection == 'paper') {
+						win = true;
+					}
+					break;
+			}
+
+			if (draw) {
+				return 'draw';
+			} else if (win) {
+				return 'win';
+			} else {
+				return 'lose';
+			}
+		}
+
+		function game() {
+			let playerScore = 0;
+			let computerScore = 0;
+
+			let i;
+
+			for (i=0; i<5; i++) {
+				let outcome = 'draw';
+				
+				while (outcome == 'draw') {
+					outcome = playRound(playerPlay(), computerPlay());
+				}
+				
+				if (outcome == 'win') {
+					playerScore++;
+				}
+				
+				if (outcome == 'lose') {
+					computerScore++;
+				}
+				
+				console.log('Game ' + (i+1) + ': ' + outcome + '.  ' + playerScore + ' - ' + computerScore);
+
+				if (playerScore > 2 || computerScore > 2) {
+					break;
+				}
+			}
+
+			if (playerScore > computerScore) {
+				console.log('You win! :)');
+			} else if (playerScore < computerScore) {
+				console.log('You lose! :(');
+			} else {
+				console.log('It\'s a draw.');
+			}
+		}
+
+		console.log(game());		
+	</script>
+</body>
+</html>
